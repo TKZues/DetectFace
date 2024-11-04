@@ -18,7 +18,7 @@ class DioOption {
   Dio createDio({xFormUrl = false, addToken = true}) {
     refreshTokenNumber = 0;
     client = Dio();
-    client!.options.connectTimeout = 10000;
+    client!.options.connectTimeout = 40000;
     client!.interceptors.add(
         QueuedInterceptorsWrapper(onRequest: (RequestOptions options, handler) {
       if (xFormUrl == true) {

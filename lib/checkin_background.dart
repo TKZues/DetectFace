@@ -1,8 +1,6 @@
-import 'package:carousel_slider/carousel_slider.dart';
-import 'package:findy/constant/color.dart';
-import 'package:findy/src/findy/screen/login/login_screen.dart';
+import 'package:findy/src/login/login_screen.dart';
 import 'package:findy/utils/config/size_config.dart';
-import 'package:findy/widget/button/buttoncustom.dart';
+import 'package:introduction_screen/introduction_screen.dart';
 import 'package:flutter/material.dart';
 
 class CheckinBackground extends StatefulWidget {
@@ -13,167 +11,155 @@ class CheckinBackground extends StatefulWidget {
 }
 
 class _CheckinBackgroundState extends State<CheckinBackground> {
-  int _currentIndex = 0;
-  final int _totalSlides = 3;
-  final CarouselController _carouselController = CarouselController();
-  final CarouselController _textCarouselController =
-      CarouselController(); // New controller for the text carousel
-
-  final List<Map<String, String>> _items = [
-    {
-      'image': 'assets/images/checkin.png',
-      'title': 'Check-in hàng ngày',
-      'description':
-          'Người dùng có thể bắt đầu phiên làm việc bằng cách thực hiện thao tác check-in. Màn hình hiển thị thời gian hiện tại và xác nhận thời gian check-in khi người dùng bấm nút. Dữ liệu sẽ được lưu vào hệ thống để theo dõi.'
-    },
-    {
-      'image': 'assets/images/checkout.png',
-      'title': 'Check-out cuối ngày',
-      'description':
-          'Người dùng có thể check-out sau khi kết thúc công việc. Dữ liệu sẽ được lưu để tính toán tổng thời gian làm việc trong ngày.'
-    },
-    {
-      'image': 'assets/images/attendance.png',
-      'title': 'Xem lịch sử điểm danh',
-      'description':
-          'Màn hình tổng quan về lịch sử check-in và check-out của người dùng, hiển thị số giờ làm việc hàng ngày.'
-    },
-  ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          const Spacer(),
-          // Image Carousel
-          CarouselSlider(
-            carouselController: _carouselController,
-            items: _items.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Image.asset(
-                    item['image'] ?? "",
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  );
-                },
-              );
-            }).toList(),
-            options: CarouselOptions(
-              height: 300.0,
-              enlargeCenterPage: true,
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
-              initialPage: 0,
-              enableInfiniteScroll: false,
-              viewportFraction: 0.97,
-              scrollPhysics: const NeverScrollableScrollPhysics()
+        body: IntroductionScreen(
+      pages: [
+        PageViewModel(
+            title: "Check-in hàng ngày",
+            bodyWidget: Center(
+              child: Text(
+                "Người dùng có thể bắt đầu phiên làm việc bằng cách thực hiện thao tác check-in. Màn hình hiển thị thời gian hiện tại và xác nhận thời gian check-in khi người dùng bấm nút. Dữ liệu sẽ được lưu vào hệ thống để theo dõi.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade500, shadows: [
+                  Shadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    offset: const Offset(1, 1),
+                  )
+                ]),
+              ),
             ),
-          ),
-          const SizedBox(height: 20),
-          // Dots Indicator
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: _items.asMap().entries.map((entry) {
-              return GestureDetector(
-                onTap: () => _carouselController.animateToPage(entry.key),
-                child: Container(
-                  width: 15.0,
-                  height: 3.0,
-                  margin: const EdgeInsets.symmetric(
-                      vertical: 8.0, horizontal: 4.0),
-                  decoration: BoxDecoration(
-                    color: (_currentIndex == entry.key
-                        ? Colors.green
-                        : Colors.grey.withOpacity(0.4)),
-                  ),
-                ),
-              );
-            }).toList(),
-          ),
-          // Text Carousel
-          CarouselSlider(
-            carouselController: _textCarouselController,
-            items: _items.map((item) {
-              return Builder(
-                builder: (BuildContext context) {
-                  return Column(
-                    children: [
-                      Text(
-                        item['title'] ?? "",
-                        style: const TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      Align(
-                        alignment: Alignment.topCenter,
-                        child: Text(
-                          item['description'] ?? "",
-                          style: const TextStyle(
-                            fontSize: 12,
-                            color: Colors.grey,
-                          ),
-                          textAlign: TextAlign.center,
-                          maxLines: 4,
-                        ),
-                      ),
-                    ],
-                  );
-                },
-              );
-            }).toList(),
-            options: CarouselOptions(
-              viewportFraction: 0.97,
-              height: 200.0,
-              enlargeCenterPage: true,
-              scrollPhysics: const NeverScrollableScrollPhysics(),
-              onPageChanged: (index, reason) {
-                setState(() {
-                  _currentIndex = index;
-                });
-              },
+            image: Image.asset("assets/images/checkout.png",
+                width: psWidth(300), fit: BoxFit.cover)),
+        PageViewModel(
+            title: "Check-in hàng ngày",
+            bodyWidget: Center(
+              child: Text(
+                "Người dùng có thể bắt đầu phiên làm việc bằng cách thực hiện thao tác check-in. Màn hình hiển thị thời gian hiện tại và xác nhận thời gian check-in khi người dùng bấm nút. Dữ liệu sẽ được lưu vào hệ thống để theo dõi.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade500, shadows: [
+                  Shadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    offset: const Offset(1, 1),
+                  )
+                ]),
+              ),
             ),
+            image: Image.asset("assets/images/checkout.png",
+                width: psWidth(300), fit: BoxFit.cover)),
+        PageViewModel(
+            title: "Check-out cuối ngày",
+            bodyWidget: Center(
+              child: Text(
+                "Người dùng có thể check-out sau khi kết thúc công việc. Dữ liệu sẽ được lưu để tính toán tổng thời gian làm việc trong ngày.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade500, shadows: [
+                  Shadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    offset: const Offset(1, 1),
+                  )
+                ]),
+              ),
+            ),
+            image: Image.asset(
+              "assets/images/checkout.png",
+             width: psWidth(300), fit: BoxFit.cover
+            )),
+        PageViewModel(
+            title: "Xem lịch sử điểm danh",
+            bodyWidget: Center(
+              child: Text(
+                "Màn hình tổng quan về lịch sử check-in và check-out của người dùng, hiển thị số giờ làm việc hàng ngày.",
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.grey.shade500, shadows: [
+                  Shadow(
+                    color: Colors.grey.withOpacity(0.5),
+                    blurRadius: 5,
+                    offset: const Offset(1, 1),
+                  )
+                ]),
+              ),
+            ),
+            image: Image.asset(
+              "assets/images/checkout.png",
+              width: psWidth(300), fit: BoxFit.cover
+            )),
+      ],
+      onDone: () {
+        Navigator.pushReplacement(
+            context, MaterialPageRoute(builder: (_) => const LoginScreen()));
+      },
+      showSkipButton: true,
+      showNextButton: true,
+      nextFlex: 1,
+      dotsFlex: 2,
+      animationDuration: 1000,
+      curve: Curves.fastOutSlowIn,
+      dotsDecorator: DotsDecorator(
+          spacing: const EdgeInsets.all(5),
+          activeColor: const Color(0xff20D5B2),
+          // activeSize: Size.square(10),
+          // size: Size.square(5),
+          activeSize: const Size(20, 10),
+          size: const Size.square(10),
+          activeShape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(25))),
+      skip: Container(
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+            color: const Color(0xff20D5B2),
+            borderRadius: BorderRadius.circular(40),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade300,
+                  blurRadius: 10,
+                  offset: const Offset(4, 4))
+            ]),
+        child: const Center(
+          child: Text(
+            "Skip",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 20),
-          ButtonCustom(
-            title: _currentIndex == _totalSlides - 1 ? "Login" : "Next",
-            colorbtn: AppColor.btncheckin,
-            colortitle: AppColor.kGreen,
-            onTap: () {
-              if (_currentIndex == _totalSlides - 1) {
-                Navigator.pushReplacement(context,
-                    MaterialPageRoute(builder: (_) => const LoginScreen()));
-              } else {
-                setState(() {
-                  _currentIndex++;
-                });
-                _carouselController.animateToPage(_currentIndex);
-                _textCarouselController.animateToPage(_currentIndex);
-              }
-            },
-            paddingX: 140,
-            paddingY: 12,
-          ),
-          SizedBox(
-            height: psHeight(10),
-          ),
-          ButtonCustom(
-            title: "Skip",
-            colorbtn: Colors.white,
-            colortitle: Colors.black,
-            onTap: () {},
-            paddingX: 140,
-            paddingY: 12,
-            boxBorder: Border.all(width: 1, color: AppColor.textGrey),
-          ),
-          const Spacer(),
-        ],
+        ),
       ),
-    );
+      next: Container(
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(40),
+            border: Border.all(color: const Color(0xff20D5B2), width: 2)),
+        child: const Center(
+          child: Icon(
+            Icons.navigate_next,
+            size: 30,
+            color: Color(0xff20D5B2),
+          ),
+        ),
+      ),
+      done: Container(
+        height: 60,
+        width: 60,
+        decoration: BoxDecoration(
+            color: const Color(0xff20D5B2),
+            borderRadius: BorderRadius.circular(40),
+            boxShadow: [
+              BoxShadow(
+                  color: Colors.grey.shade300,
+                  blurRadius: 40,
+                  offset: const Offset(4, 4))
+            ]),
+        child: const Center(
+          child: Text(
+            "Done",
+            style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ),
+    ));
   }
 }

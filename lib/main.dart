@@ -1,8 +1,11 @@
 import 'package:findy/checkin_background.dart';
 import 'package:findy/constant/color.dart';
 import 'package:findy/splash_screen.dart';
-import 'package:findy/src/findy/screen/bottomnav/bottomnavigation.dart';
-import 'package:findy/src/findy/screen/login/login_screen.dart';
+import 'package:findy/src/student/screen/bottomnav/bottomnavigation.dart';
+import 'package:findy/src/student/screen/home/management_subject/classes_manage_screen.dart';
+import 'package:findy/src/login/login_screen.dart';
+import 'package:findy/src/student/screen/timeline/timeline.dart';
+import 'package:findy/src/teacher/screen/bottomnav/bottomnavigation.dart';
 import 'package:findy/utils/config/size_config.dart';
 import 'package:findy/utils/initprovider.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +21,7 @@ final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 // ignore: non_constant_identifier_names
 bool isSmallDevice = false;
 bool isLargeDevice = false;
-String baseUrl = "https://5caa-123-25-190-41.ngrok-free.app";
+String baseUrl = "https://8e1a-2405-4803-c879-2fb0-e06e-67a0-92eb-263.ngrok-free.app";
 final GlobalKey<ScaffoldMessengerState> scaffoldMessengerKey =
     GlobalKey<ScaffoldMessengerState>();
 // ignore: non_constant_identifier_names
@@ -93,6 +96,9 @@ class _FindyAppState extends State<FindyApp> {
         '/scan_qr': (context) => const CheckinBackground(),
         '/scan_face': (context) => const LoginScreen(),
         '/bottom': (context) => const BottomNavigationApp(),
+        '/checkinout': (context) => const ClassesManageScreen(),
+        '/bottomteacher':(context) => const BottomNavigationAppTeacher(),
+        '/timeline': (context) => const TimeLineApp(),
       },
     );
   }

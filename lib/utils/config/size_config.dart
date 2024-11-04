@@ -40,3 +40,19 @@ double psWidth(double inputWidth) {
   // 375 is the layout width that designer use
   return (inputWidth / 375.0) * screenWidth;
 }
+
+
+// Get the proportionate height as per screen size
+double getProportionateScreenHeight(double inputHeight) {
+  double screenHeight = SizeConfig.screenHeight;
+  // 896 is the layout height that designer use
+  // or you can say iPhone 11
+  return (inputHeight / 896.0) * screenHeight;
+}
+
+// Get the proportionate height as per screen size
+double getProportionateScreenWidth(double inputWidth) {
+  double screenWidth = SizeConfig.screenWidth;
+  // 414 is the layout width that designer use
+  return (inputWidth / 414.0) * screenWidth;
+}
